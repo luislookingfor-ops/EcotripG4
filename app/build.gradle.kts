@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapplication"
+    namespace = "com.example.safepass2026"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "com.example.safepass2026"
         minSdk = 26
         targetSdk = 36 
         versionCode = 1
