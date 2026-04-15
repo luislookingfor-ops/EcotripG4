@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.safepass2026
 
 import org.junit.Test
 
