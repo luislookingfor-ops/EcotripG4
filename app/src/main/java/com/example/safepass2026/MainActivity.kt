@@ -51,10 +51,10 @@ fun SafePassApp() {
                         edad = edadText,
                         onEdadChange = { edadText = it },
                         onRegistrar = {
-                            // BLINDAJE TÉCNICO: Evitamos crash si edadText está vacío
+                            // Evitamos crash si edadText está vacío
                             val edadNumerica = edadText.toIntOrNull()
 
-                            // Uso de let (Scope Function) para validar el nombre
+                            // Uso de let para validar el nombre
                             nombreText.takeIf { it.isNotBlank() }?.let { nombreLimpio ->
                                 // Uso de la Extension Function de Kevin
                                 if (edadNumerica.esMayorDeEdad()) {
@@ -75,7 +75,7 @@ fun SafePassApp() {
                     )
                 }
                 is RegistroState.Success -> {
-                    // Estado de éxito: Mensaje verde y String Templates
+                    // Estado de éxito mensaje en verde
                     Text(
                         text = "${state.mensaje}\n\nBienvenido: ${state.asistente.nombre}",
                         color = Color(0xFF2E7D32),
@@ -84,7 +84,7 @@ fun SafePassApp() {
                     Button(onClick = { uiState = RegistroState.Idle }) { Text("Volver") }
                 }
                 is RegistroState.Error -> {
-                    // Estado de error: Mensaje rojo
+                    // Estado de error mensaje en rojo
                     Text(text = state.mensaje, color = Color.Red, style = MaterialTheme.typography.bodyLarge)
                     Button(onClick = { uiState = RegistroState.Idle }) { Text("Reintentar") }
                 }
