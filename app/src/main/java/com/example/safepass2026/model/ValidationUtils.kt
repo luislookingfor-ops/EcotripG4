@@ -13,7 +13,7 @@ fun procesarRegistro(usuario: String, edad: Int, validacionExtra: (Int) -> Boole
         println("Registro rechazado: No cumple con los criterios de validación")
     }
 }
-// para el ultimo paso, hacemos el uso de "aply", que en generar sirve para instanciar
+// hacemos uso de "aply", que en generar sirve para instanciar
 // al asistente de forma limpia en la logica empleada. Como vimos en clase
 // nos ahorramos repetir "nuevoAsistente" varias veces.
 fun crearAsistenteEjemplo() {
