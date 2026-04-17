@@ -29,7 +29,7 @@ fun SafePassApp() {
     var nombreText by remember { mutableStateOf("") }
     var edadText by remember { mutableStateOf("") }
 
-    // Estado de la UI (Sealed Class de Yuli)
+    // Estado de la UI
     var uiState by remember { mutableStateOf<RegistroState>(RegistroState.Idle) }
 
     Scaffold(
