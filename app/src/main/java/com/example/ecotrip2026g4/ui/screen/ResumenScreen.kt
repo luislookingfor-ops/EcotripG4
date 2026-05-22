@@ -57,11 +57,11 @@ fun ResumenScreen(
 
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
-                Text("👤 Viajero Responsable: $nombreViajero", style = MaterialTheme.typography.bodyLarge)
-                Text("📍 Destino Ecológico: $destino", style = MaterialTheme.typography.bodyLarge)
-                Text("⏱️ Estadía Estimada: $diasDuracion días", style = MaterialTheme.typography.bodyLarge)
-                Text("🚍 Tipo de Movilidad: ${medioTransporte.nombreDescriptivo}", style = MaterialTheme.typography.bodyLarge)
-                Text("👥 Modalidad de Grupo: ${if (esViajeGrupal) "Sí, Comunitario" else "No, Individual"}", style = MaterialTheme.typography.bodyLarge)
+                Text(" Viajero Responsable: $nombreViajero", style = MaterialTheme.typography.bodyLarge)
+                Text(" Destino Ecológico: $destino", style = MaterialTheme.typography.bodyLarge)
+                Text(" Estadía Estimada: $diasDuracion días", style = MaterialTheme.typography.bodyLarge)
+                Text(" Tipo de Movilidad: ${medioTransporte.nombreDescriptivo}", style = MaterialTheme.typography.bodyLarge)
+                Text(" Modalidad de Grupo: ${if (esViajeGrupal) "Sí, Comunitario" else "No, Individual"}", style = MaterialTheme.typography.bodyLarge)
 
                 Card(
                     modifier = Modifier
@@ -72,8 +72,8 @@ fun ResumenScreen(
                     )
                 ) {
                     Text(
-                        text = if (bajaHuella) "🌱 Certificación: Ruta de Baja Huella de Carbono Optimizada"
-                        else "⚠️ Alerta: Ruta estándar sin restricciones de emisiones ambientales",
+                        text = if (bajaHuella) " Certificación: Ruta de Baja Huella de Carbono Optimizada"
+                        else " Alerta: Ruta estándar sin restricciones de emisiones ambientales",
                         modifier = Modifier.padding(12.dp),
                         style = MaterialTheme.typography.bodyMedium,
                         color = if (bajaHuella) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onErrorContainer
