@@ -72,4 +72,9 @@ class EcoTripViewModel(
         val dias = diasDuracion.value.toIntOrNull()
         return destino.value.isNotBlank() && dias != null && dias > 0
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        android.util.Log.d("EcoTrip_Lifecycle", "Memoria del viaje liberada.")
+    }
 }
