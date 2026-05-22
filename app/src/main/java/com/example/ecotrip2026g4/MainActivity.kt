@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val coroutineScope = rememberCoroutineScope()
 
-                // Inicialización del ViewModel resiliente
+                // ViewModel sin DataStore (los datos globales se manejan directamente)
                 val ecoTripViewModel: EcoTripViewModel = viewModel()
 
                 // Recolección reactiva de los estados permanentes de DataStore
@@ -58,10 +58,8 @@ class MainActivity : ComponentActivity() {
                                 }
                             },
                             onNavegarAResumen = {
-                                // Extraemos de forma segura el valor y lo convertimos con toIntOrNull
                                 val diasValidados = ecoTripViewModel.diasDuracion.value.toIntOrNull() ?: 1
 
-                                // Navegación Fuertemente Tipada (Type-Safe Compile Check)
                                 navController.navigate(
                                     ResumenRutaRoute(
                                         destino = ecoTripViewModel.destino.value,
@@ -75,7 +73,6 @@ class MainActivity : ComponentActivity() {
 
                     // Pantalla 2: Panel de confirmación adaptativo
                     composable<ResumenRutaRoute> { backStackEntry ->
-                        // Deserialización automática del argumento en un objeto tipado por el compilador
                         val argumentosRuta: ResumenRutaRoute = backStackEntry.toRoute()
                         val medioTransporteSeleccionado by ecoTripViewModel.medioTransporte.collectAsState()
 
@@ -87,9 +84,6 @@ class MainActivity : ComponentActivity() {
                             esViajeGrupal = argumentosRuta.esViajeGrupal,
                             medioTransporte = medioTransporteSeleccionado,
                             onVolverAtras = {
-                                /* * Higiene Estricta del Back Stack:
-                                 * Retornamos limpiando la pila para evitar redundancias en memoria.
-                                 */
                                 navController.navigate(FormularioViajeRoute) {
                                     popUpTo(FormularioViajeRoute) {
                                         inclusive = true
