@@ -57,7 +57,6 @@ fun ResumenScreen(
 
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
-                // Uso idiomático estricto de interpolación de cadenas de Kotlin
                 Text("👤 Viajero Responsable: $nombreViajero", style = MaterialTheme.typography.bodyLarge)
                 Text("📍 Destino Ecológico: $destino", style = MaterialTheme.typography.bodyLarge)
                 Text("⏱️ Estadía Estimada: $diasDuracion días", style = MaterialTheme.typography.bodyLarge)
@@ -65,7 +64,9 @@ fun ResumenScreen(
                 Text("👥 Modalidad de Grupo: ${if (esViajeGrupal) "Sí, Comunitario" else "No, Individual"}", style = MaterialTheme.typography.bodyLarge)
 
                 Card(
-                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = if (bajaHuella) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer
                     )

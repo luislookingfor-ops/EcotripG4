@@ -22,14 +22,16 @@ fun FormularioScreen(
     onGuardarGlobales: (String, Boolean) -> Unit,
     onNavegarAResumen: () -> Unit
 ) {
-    // Sincronizar campos globales de DataStore en estados locales iniciales
+    // Estados locales para datos globales (DataStore)
     var nombreInput by remember(usuarioGlobal) { mutableStateOf(usuarioGlobal) }
     var huellaInput by remember(huellaGlobal) { mutableStateOf(huellaGlobal) }
 
+    // Estados del ViewModel (persisten en rotación)
     val destino by viewModel.destino.collectAsState()
     val diasDuracion by viewModel.diasDuracion.collectAsState()
     val medioTransporte by viewModel.medioTransporte.collectAsState()
     val esViajeGrupal by viewModel.esViajeGrupal.collectAsState()
+    val esFormularioValido by viewModel.esFormularioValido.collectAsState()
 
     var menuExpandido by remember { mutableStateOf(false) }
 
@@ -44,10 +46,11 @@ fun FormularioScreen(
             )
         },
         floatingActionButton = {
-            if (viewModel.esFormularioValido() && nombreInput.isNotBlank()) {
+            // ✅ El botón se muestra cuando el formulario ES VÁLIDO y hay nombre
+            if (esFormularioValido && nombreInput.isNotBlank()) {
                 FloatingActionButton(
                     onClick = {
-                        // Persistir datos globales en disco antes de avanzar
+                        // Guardar datos globales en DataStore antes de navegar
                         onGuardarGlobales(nombreInput, huellaInput)
                         onNavegarAResumen()
                     },
@@ -71,7 +74,13 @@ fun FormularioScreen(
 
             OutlinedTextField(
                 value = nombreInput,
-                onValueChange = { nombreInput = it },
+                onValueChange = {
+                    nombreInput = it
+                    // Guardar automáticamente mientras escribe
+                    if (it.isNotBlank()) {
+                        onGuardarGlobales(it, huellaInput)
+                    }
+                },
                 label = { Text("Nombre del Viajero") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
@@ -85,7 +94,10 @@ fun FormularioScreen(
                 Text("Exclusivamente rutas eco-friendly")
                 Switch(
                     checked = huellaInput,
-                    onCheckedChange = { huellaInput = it }
+                    onCheckedChange = {
+                        huellaInput = it
+                        onGuardarGlobales(nombreInput, it)
+                    }
                 )
             }
 
@@ -105,10 +117,11 @@ fun FormularioScreen(
                 onValueChange = { viewModel.onDuracionChanged(it) },
                 label = { Text("Duración del Viaje (Días)") },
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true
+                singleLine = true,
+                isError = diasDuracion.isNotBlank() && diasDuracion.toIntOrNull() == null
             )
 
-            // Selector del Medio de Transporte (Exclusivo M3 Component)
+            // Selector del Medio de Transporte
             Box(modifier = Modifier.fillMaxWidth()) {
                 OutlinedButton(
                     onClick = { menuExpandido = true },
