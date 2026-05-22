@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
@@ -34,9 +35,6 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val coroutineScope = rememberCoroutineScope()
 
-                // ViewModel sin DataStore (los datos globales se manejan directamente)
-                val ecoTripViewModel: EcoTripViewModel = viewModel()
-
                 // Recolección reactiva de los estados permanentes de DataStore
                 val usuarioGlobal by dataStoreManager.nombreUsuarioFlow.collectAsState(initial = "")
                 val huellaGlobal by dataStoreManager.bajaHuellaCarbonoFlow.collectAsState(initial = false)
@@ -46,7 +44,8 @@ class MainActivity : ComponentActivity() {
                     startDestination = FormularioViajeRoute
                 ) {
                     // Pantalla 1: Formulario reactivo y persistente
-                    composable<FormularioViajeRoute> {
+                    composable<FormularioViajeRoute> { backStackEntry ->
+                        val ecoTripViewModel: EcoTripViewModel = viewModel(backStackEntry)
                         FormularioScreen(
                             viewModel = ecoTripViewModel,
                             usuarioGlobal = usuarioGlobal,
@@ -71,9 +70,14 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
+
                     // Pantalla 2: Panel de confirmación adaptativo
                     composable<ResumenRutaRoute> { backStackEntry ->
                         val argumentosRuta: ResumenRutaRoute = backStackEntry.toRoute()
+                        val formularioEntry = remember(backStackEntry) {
+                            navController.getBackStackEntry(FormularioViajeRoute)
+                        }
+                        val ecoTripViewModel: EcoTripViewModel = viewModel(formularioEntry)
                         val medioTransporteSeleccionado by ecoTripViewModel.medioTransporte.collectAsState()
 
                         ResumenScreen(
