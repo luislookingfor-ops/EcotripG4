@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.safepass2026"
+    namespace = "com.example.ecotrip2026g4"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.safepass2026"
+        applicationId = "com.example.ecotrip2026g4"
         minSdk = 26
         targetSdk = 36 
         versionCode = 1
@@ -45,5 +45,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.monitor)
-    implementation(libs.androidx.junit.ktx) //
+    implementation(libs.androidx.junit.ktx)
+
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("androidx.navigation:navigation-compose:2.8.0")
 }

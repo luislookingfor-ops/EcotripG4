@@ -1,4 +1,4 @@
-package com.example.safepass2026
+package com.example.ecotrip2026g4
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

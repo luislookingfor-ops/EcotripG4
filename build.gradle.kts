@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.safepass2026"
+    namespace = "com.example.ecotrip2026g4"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.safepass2026"
+        applicationId = "com.example.ecotrip2026g4"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

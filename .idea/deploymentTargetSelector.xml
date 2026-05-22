@@ -11,6 +11,9 @@
       <SelectionState runConfigName="SafePass2026G4">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="ecotrip2026g4">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
