@@ -1,0 +1,10 @@
+package com.example.pucematch.data.remote
+
+/**
+ * Modelo de request para enviar un mensaje en el chat de un match.
+ */
+data class MessageRequest(
+    val matchId: String,
+    val senderId: String,
+    val content: String
+)

@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ecotrip2026g4"
+rootProject.name = "PuceMatch"
 include(":app")
 
  
